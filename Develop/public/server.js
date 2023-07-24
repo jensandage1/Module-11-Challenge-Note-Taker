@@ -23,7 +23,7 @@ app.get('/notes', (req, res) =>
 
 
 //homepage is index.html
-app.get('/', (req, res) =>
+app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, '/index.html'))
 );
 
@@ -48,18 +48,32 @@ app.post('/api/notes', (req, res) => {
       note_id: uuid(),
     };
 
-    readAndAppend(newNote, './db/db.json');
+       // Convert the data to a string so we can save it
+       const noteString = JSON.stringify(newNote);
 
-    const response = {
-      status: 'success',
-      body: newNote,
-        };
+       // Write the string to a file
+       fs.writeFile(`./db/${newNote.title}.json`, noteString, (err) =>
+         err
+           ? console.error(err)
+           : console.log(
+               `Review for ${newNote.title} has been written to JSON file`
+             )
+       );
+   
+       const response = {
+         status: 'success',
+         body: newNote,
+       };
+   
+       console.log(response);
+       res.status(201).json(response);
+     } else {
+       res.status(500).json('Error in posting review');
+     }
+   });
+   
 
-      res.json(response);
-} else {
-  res.json('error in posting note');
-}
-});
+  
 
 
 app.listen(PORT, ()=> {
