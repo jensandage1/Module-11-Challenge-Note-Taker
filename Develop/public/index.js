@@ -51,7 +51,6 @@ const saveNote = (note) =>
     .then((response) => response.json())
     .then((data) => {
       alert(data);
-      createCard(note);
     })
     .catch((error) => {
       console.error('error', error);
