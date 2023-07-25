@@ -32,7 +32,10 @@ app.get('*', (req, res) =>
 // GET Route for retrieving all the notes
 app.get('/api/notes', (req, res) => {
   console.info(`${req.method} request received for notes`);
-  readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+  readFromFile('./db/db.json').then((data) => {
+    console.log(data);
+    res.json(JSON.parse(data));
+  });
 });
 
 
@@ -52,14 +55,18 @@ app.post('/api/notes', (req, res) => {
        // Convert the data to a string so we can save it
        const noteString = JSON.stringify(newNote);
 
-       // Write the string to a file
-       fs.writeFile(`./db/${newNote.title}.json`, noteString, (err) =>
-         err
-           ? console.error(err)
-           : console.log(
-               `Review for ${newNote.title} has been written to JSON file`
-             )
-       );
+       // append string
+       const readandAppend = (content, file) => {
+        fs.readFile("./db/db.json", 'utf8', (err, data) => {
+          if (err){
+           console.error(err)
+          } else {
+            const parsedData = JSON.parse(data);
+            parsedData.push(content);
+            writeToFile(file, parsedData);
+          }
+        });
+      };
    
        const response = {
          status: 'success',
@@ -73,8 +80,6 @@ app.post('/api/notes', (req, res) => {
      }
    });
    
-
-  
 
 
 app.listen(PORT, ()=> {
