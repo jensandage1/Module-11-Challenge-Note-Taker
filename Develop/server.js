@@ -23,17 +23,12 @@ app.get('/notes', (req, res) =>
 );
 
 
-//homepage is index.html
-app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/index.html'))
-);
 
 
 // GET Route for retrieving all the notes
 app.get('/api/notes', (req, res) => {
   console.info(`${req.method} request received for notes`);
   readFromFile('./db/db.json').then((data) => {
-    console.log(data);
     res.json(JSON.parse(data));
   });
 });
@@ -57,13 +52,13 @@ app.post('/api/notes', (req, res) => {
 
        // append string
        const readandAppend = (content, file) => {
-        fs.readFile("./db/db.json", 'utf8', (err, data) => {
+        fs.readFile("./db/db.json", 'UTF-8', (err, data) => {
           if (err){
            console.error(err)
           } else {
             const parsedData = JSON.parse(data);
             parsedData.push(content);
-            writeToFile(file, parsedData);
+            writeToFile("./db/db.json", parsedData);
           }
         });
       };
@@ -81,6 +76,10 @@ app.post('/api/notes', (req, res) => {
    });
    
 
+//homepage is index.html
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/public/index.html'))
+);
 
 app.listen(PORT, ()=> {
     console.log(`app listening on port http://localhost:${PORT}`)
