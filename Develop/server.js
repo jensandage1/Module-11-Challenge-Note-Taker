@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const app = express();
 const path = require('path');
 const PORT = 3001;
@@ -18,13 +19,13 @@ app.use(express.static('public'));
 
 //returns notes.html
 app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, '/notes.html'))
+  res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
 
 //homepage is index.html
 app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/index.html'))
+  res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
 
@@ -68,7 +69,7 @@ app.post('/api/notes', (req, res) => {
        console.log(response);
        res.status(201).json(response);
      } else {
-       res.status(500).json('Error in posting review');
+       res.status(500).json('Error in posting note');
      }
    });
    

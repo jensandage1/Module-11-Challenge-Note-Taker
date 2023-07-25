@@ -50,7 +50,7 @@ const saveNote = (note) =>
   })
     .then((response) => response.json())
     .then((data) => {
-      alert(data);
+      return data;
     })
     .catch((error) => {
       console.error('error', error);
