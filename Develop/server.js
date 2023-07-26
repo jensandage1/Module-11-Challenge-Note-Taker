@@ -72,14 +72,6 @@ app.post('/api/notes', (req, res) => {
      }
    });
 
-   //need to display data on the right side when clicking on the note
-  //  app.get('/api/notes/:id', (req, res) => {
-  //   const requestedId = req.params.note_id;
-  //  })
-
-  //  app.delete(`/api/notes/:id`, (req, res) => {
-  //   const id = req.params.note_id;
-  // });
 
 //homepage is index.html
 app.get('*', (req, res) =>

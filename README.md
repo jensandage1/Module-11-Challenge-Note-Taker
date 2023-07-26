@@ -1,32 +1,32 @@
-# Note Taker Starter Code
-
-GIVEN a note-taking application
-
-<!-- WHEN I open the Note Taker
-    THEN I am presented with a landing page with a link to a notes page -->
-<!-- WHEN I click on the link to the notes page
-    THEN I am presented with a page with existing notes listed in the left-hand column, plus empty fields to enter a new note title and the note’s text in the right-hand column -->
-<!-- <!-- WHEN I enter a new note title and the note’s text
-    THEN a Save icon appears in the navigation at the top of the page -->
-<!-- WHEN I click on the Save icon
-    THEN the new note I have entered is saved and appears in the left-hand column with the other existing notes --> -->
-WHEN I click on an existing note in the list in the left-hand column
-    THEN that note appears in the right-hand column
-<!-- WHEN I click on the Write icon in the navigation at the top of the page
-    THEN I am presented with empty fields to enter a new note title and the note’s text in the right-hand column -->
+# Module-11-Challenge-Note-Taker
 
 
+## Description:
+    This app is used for note taking. It can be used to save a list of notes that will be displayed when you open the  app. You can view notes and add more notes. Currently you can only delete notes directly from the database. 
 
-The application should have a db.json file on the back end that will be used to store and retrieve notes using the fs module.
+## Table of Contents:
+* [Installation](#installation)
+* [Usage](#usage)
+* [Credits](#credits)
+* [License](#license)
 
-The following HTML routes should be created:
+## Installation
+You need to install express and fs to use this. First type npm init and run through the prompts, then npm install and it will install the requred modules. 
 
-<!-- GET /notes should return the notes.html file. -->
+## Usage
+After running npm init and npm install, navigate to the develop folder in you command line and run "node server.js" this will activate the port, which you can control click on or type out in the browser.  When you open the app it takes you to a home page, when you click the get started button, it takes you to the notes page. It will render your previously saved notes on the left. When you click on those notes they will display in the right column with their discriptions. When you click the + symbol you can add a new note and when you type both the title and note text, a save icon will apear in the upper right next to the + icon. Click this and your note will be added to the left side in your saved notes.   
 
-<!-- GET * should return the index.html file. -->
+## Credits
+ A learning assistant through slackbot helped me with lines 53 - 57 on the server.js file.    
 
-The following API routes should be created:
+## License  
 
-<!-- GET /api/notes should read the db.json file and return all saved notes as JSON. -->
+## Tests
+Insomnia was used for testing the http routes. 
 
-POST /api/notes should receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client. You'll need to find a way to give each note a unique id when it's saved (look into npm packages that could do this for you).
+## Questions
+
+ 
+ 
+
+ ![screenshot of the note taking funcationality](<Screenshot 2023-07-25 234050.png>) ![screenshot of the homescreen](<Screenshot 2023-07-25 234108.png>)
