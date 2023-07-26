@@ -6,7 +6,11 @@ const PORT = 3001;
 // Helper function for generating unique ids
 const uuid = require('./helpers/uuid');
 // Helper functions for reading and writing to the JSON file
-const { readFromFile, readAndAppend } = require('./helpers/fsUtils');
+const {
+   readFromFile, 
+   readAndAppend,
+  writeToFile,
+ } = require('./helpers/fsUtils');
 
 
 // Middleware for parsing JSON and urlencoded form data
@@ -46,22 +50,15 @@ app.post('/api/notes', (req, res) => {
       text,
       note_id: uuid(),
     };
-
-       // Convert the data to a string so we can save it
-       const noteString = JSON.stringify(newNote);
-
-       // append string
-       const readandAppend = (noteString, file) => {
         fs.readFile("./db/db.json", 'UTF-8', (err, data) => {
           if (err){
            console.error(err)
           } else {
             const parsedData = JSON.parse(data);
-            parsedData.push(noteString);
+            parsedData.push(newNote);
             writeToFile("./db/db.json", parsedData);
           }
         });
-      };
    
        const response = {
          status: 'success',
@@ -74,6 +71,20 @@ app.post('/api/notes', (req, res) => {
        res.status(500).json('Error in posting note');
      }
    });
+
+   //need to display data on the right side when clicking on the note
+   
+  //  app.get(`/api/notes/${note_id}`, (req, res) => {
+
+  //  })
+
+  //  app.delete(`/api/notes/:${id}`, (req, res) => {
+  //   let index = db.findIndex(item => item.id === req.query.id);
+  //   db.splice(index, 1);
+  //   res
+  //   if (err) console.log(err);
+  //   res.send("delete request called")
+  //  })
    
 
 //homepage is index.html
