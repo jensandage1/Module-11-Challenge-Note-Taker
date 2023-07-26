@@ -51,13 +51,13 @@ app.post('/api/notes', (req, res) => {
        const noteString = JSON.stringify(newNote);
 
        // append string
-       const readandAppend = (content, file) => {
+       const readandAppend = (noteString, file) => {
         fs.readFile("./db/db.json", 'UTF-8', (err, data) => {
           if (err){
            console.error(err)
           } else {
             const parsedData = JSON.parse(data);
-            parsedData.push(content);
+            parsedData.push(noteString);
             writeToFile("./db/db.json", parsedData);
           }
         });
